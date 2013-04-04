@@ -9,16 +9,9 @@
 
 
      <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.Resources>
-            <Style TargetType="ListViewItem" x:Key="WordStyle">
-                <!--<Setter Property="Background" Value="CornflowerBlue"/>-->
-                <Setter Property="Foreground" Value="Orange"/>
-            </Style>
-        </Grid.Resources>
-
-
 
         <Button x:Name="ButtontoAdd" Content="Add" HorizontalAlignment="Left" Height="63" Margin="1010,84,0,0" VerticalAlignment="Top" Width="223" Click="AddWord"/>
+         
         <ListView  x:Name="UserWordBox"
             HorizontalAlignment="Left" 
                   Height="309" 
@@ -27,19 +20,20 @@
                   Width="454" 
                   Background="White"
                   SelectionMode="Multiple"
-                   ItemsSource="{Binding}">
+                   ItemsSource="{Binding}" SelectionChanged="selectd">
             <!--<ListViewItem Content="{Binding word}" Style="{StaticResource WordStyle}"/>
             <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>
             <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>-->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Background="AliceBlue">
-                        <TextBlock Text="{Binding word}" Foreground="Blue" />
+                        <TextBlock Text="{Binding word}" Style="{StaticResource ListWordStyle}" />
                         <!--Style="{StaticResource WordStyle}"-->
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
+        <TextBox x:Name="WordDisplay" HorizontalAlignment="Left" Height="65" Margin="729,229,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
+
     </Grid>
 </Page>

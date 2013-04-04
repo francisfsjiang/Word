@@ -46,34 +46,40 @@ namespace Word
             this.Frame.Navigate(typeof(AddPage));
         }
 
-        public class userwords : INotifyPropertyChanged
+        private void selectd(object sender, SelectionChangedEventArgs e)
         {
-            public event PropertyChangedEventHandler PropertyChanged;
-            private string Word;
-            private string Ps;
-            private string Explain;
-            public userwords(string word, string ps, string explain)
-            {
-                Word = word;
-                Ps = ps;
-                Explain = explain;
-            }
-            public string word
-            {
-                get
-                {
-                    return Word;
-                }
-                set
-                {
-                    Word = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs(word));
-                    }
-                }
-            }
+            var selectword=UserWordBox.SelectedItems;
+            WordDisplay.Text=selectword.;
         }
+
+        //public class userwords : INotifyPropertyChanged
+        //{
+        //    public event PropertyChangedEventHandler PropertyChanged;
+        //    private string Word;
+        //    private string Ps;
+        //    private string Explain;
+        //    public userwords(string word, string ps, string explain)
+        //    {
+        //        Word = word;
+        //        Ps = ps;
+        //        Explain = explain;
+        //    }
+        //    public string word
+        //    {
+        //        get
+        //        {
+        //            return Word;
+        //        }
+        //        set
+        //        {
+        //            Word = value;
+        //            if (PropertyChanged != null)
+        //            {
+        //                PropertyChanged(this, new PropertyChangedEventArgs(word));
+        //            }
+        //        }
+        //    }
+        //}
 
 
 

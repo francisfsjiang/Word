@@ -6,8 +6,15 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="TextBlock" x:Key="ListWordStyle">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontStyle" Value="Normal"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontStretch" Value="Normal"/>
+                <Setter Property="FontFamily" Value="2"/>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
-
+                
                 <!-- 
                     用于定义平台外观的共同方面的样式
                     Visual Studio 项目和项模板所必需的
