@@ -5,13 +5,31 @@
     xmlns:local="using:Word"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:src="clr-namespace:ListBoxSnippetEx"
     mc:Ignorable="d">
 
+
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.Resources>
+            <src:Customers x:Key="customers"/>
+        </Grid.Resources>
+
         <Button x:Name="ButtontoAdd" Content="Add" HorizontalAlignment="Left" Height="63" Margin="1010,84,0,0" VerticalAlignment="Top" Width="223" Click="AddWord"/>
         <ListBox  HorizontalAlignment="Left" Height="500" Margin="124,204,0,0" VerticalAlignment="Top" Width="454" Background="White"  
-                 ItemsSource="{StaticResource Customers}">
-           
+                 ItemsSource="{StaticResource customers}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Padding="5,0,5,0"
+                                          Text="{Binding FirstName}" />
+                        <TextBlock Text="{Binding LastName}" />
+                        <TextBlock Text=", " />
+                        <TextBlock Text="{Binding Address}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
         </ListBox>
     </Grid>
 </Page>
