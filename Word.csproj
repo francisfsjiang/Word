@@ -101,6 +101,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Folder Include="UserData\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPage.xaml.cs">

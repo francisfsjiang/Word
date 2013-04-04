@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -22,9 +23,13 @@ namespace Word
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<userwords> wordlist=new ObservableCollection<userwords>();
         public MainPage()
         {
             this.InitializeComponent();
+            wordlist.Add(new userwords("explain", "ɪkˈsplen","vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
+            wordlist.Add(new userwords("explain", "ɪkˈsplen", "vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
+            UserWordBox.DataContext=wordlist;
         }
 
         /// <summary>
@@ -41,6 +46,34 @@ namespace Word
             this.Frame.Navigate(typeof(AddPage));
         }
 
+        public class userwords : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler PropertyChanged;
+            private string Word;
+            private string Ps;
+            private string Explain;
+            public userwords(string word, string ps, string explain)
+            {
+                Word = word;
+                Ps = ps;
+                Explain = explain;
+            }
+            public string word
+            {
+                get
+                {
+                    return Word;
+                }
+                set
+                {
+                    Word = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs(word));
+                    }
+                }
+            }
+        }
 
 
 

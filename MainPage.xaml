@@ -11,7 +11,7 @@
      <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.Resources>
             <Style TargetType="ListViewItem" x:Key="WordStyle">
-                <Setter Property="Background" Value="CornflowerBlue"/>
+                <!--<Setter Property="Background" Value="CornflowerBlue"/>-->
                 <Setter Property="Foreground" Value="Orange"/>
             </Style>
         </Grid.Resources>
@@ -21,25 +21,24 @@
         <Button x:Name="ButtontoAdd" Content="Add" HorizontalAlignment="Left" Height="63" Margin="1010,84,0,0" VerticalAlignment="Top" Width="223" Click="AddWord"/>
         <ListView  x:Name="UserWordBox"
             HorizontalAlignment="Left" 
-                  Height="500" 
+                  Height="309" 
                   Margin="124,204,0,0" 
                   VerticalAlignment="Top" 
                   Width="454" 
                   Background="White"
-                  SelectionMode="Multiple">
-            <!--ItemsSource="{StaticResource customers}"-->
+                  SelectionMode="Multiple"
+                   ItemsSource="{Binding}">
+            <!--<ListViewItem Content="{Binding word}" Style="{StaticResource WordStyle}"/>
             <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>
-            <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>
-            <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>
-                <!--<TextBlock Text="啊啊啊啊"/>
-            </ListBoxItem>-->
-            <!--<ListBox.ItemTemplate>
+            <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>-->
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="啊啊啊啊啊" />
+                    <StackPanel Orientation="Horizontal" Background="AliceBlue">
+                        <TextBlock Text="{Binding word}" Foreground="Blue" />
+                        <!--Style="{StaticResource WordStyle}"-->
                     </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate>-->
+            </ListView.ItemTemplate>
 
         </ListView>
     </Grid>
