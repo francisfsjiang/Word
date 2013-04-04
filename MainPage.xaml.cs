@@ -41,16 +41,37 @@ namespace Word
         {
         }
 
+        //private void AddWord(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(AddPage));
+        //}
+
         private void AddWord(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddPage));
+            wordlist.Add(new userwords(WordDisplay.Text,PsDisplay.Text,ExplainDisplay.Text));
+        }
+
+        private void DeleteWord(object sender, RoutedEventArgs e)
+        {
+            if(UserWordBox.SelectedItems.Count<1)return ;
+            wordlist.RemoveAt(UserWordBox.SelectedIndex);
         }
 
         private void selectd(object sender, SelectionChangedEventArgs e)
         {
-            var selectword=UserWordBox.SelectedItems;
-            WordDisplay.Text=selectword.;
+            if(UserWordBox.SelectedItems.Count<1)return ;
+                var sel=wordlist.ElementAt(UserWordBox.SelectedIndex);
+                WordDisplay.Text=sel.word;
         }
+
+
+
+       //private void selectd(object sender, SelectionChangedEventArgs e)
+       // {
+       //     //var selectword=UserWordBox.SelectedItems;
+       //     //selectword.Add(new userwords(WordDisplay.Text,"sadsad","sadasd")).;
+       // }
+
 
         //public class userwords : INotifyPropertyChanged
         //{

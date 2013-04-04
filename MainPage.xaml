@@ -19,8 +19,8 @@
                   VerticalAlignment="Top" 
                   Width="454" 
                   Background="White"
-                  SelectionMode="Multiple"
-                   ItemsSource="{Binding}" SelectionChanged="selectd">
+                  SelectionMode="Single"
+                   ItemsSource="{Binding Mode=OneWay}" SelectionChanged="selectd" ><!--SelectionChanged="selectd"-->
             <!--<ListViewItem Content="{Binding word}" Style="{StaticResource WordStyle}"/>
             <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>
             <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>-->
@@ -34,6 +34,9 @@
             </ListView.ItemTemplate>
         </ListView>
         <TextBox x:Name="WordDisplay" HorizontalAlignment="Left" Height="65" Margin="729,229,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
+        <TextBox x:Name="PsDisplay" HorizontalAlignment="Left" Height="65" Margin="729,325,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
+        <TextBox x:Name="ExplainDisplay" HorizontalAlignment="Left" Height="65" Margin="729,413,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
+        <Button x:Name="DeleteButton" Content="DeleteButton" HorizontalAlignment="Left" Margin="1023,658,0,0" VerticalAlignment="Top" Click="DeleteWord"/>
 
     </Grid>
 </Page>
