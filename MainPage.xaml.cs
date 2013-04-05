@@ -41,68 +41,63 @@ namespace Word
         {
         }
 
-        //private void AddWord(object sender, RoutedEventArgs e)
-        //{
-        //    this.Frame.Navigate(typeof(AddPage));
-        //}
 
         private void AddWord(object sender, RoutedEventArgs e)
         {
-            wordlist.Add(new userwords(WordDisplay.Text,PsDisplay.Text,ExplainDisplay.Text));
+            this.NavigationCacheMode(AddPage);
+            //wordlist.Add(new userwords(WordDisplay.Text,PsDisplay.Text,ExplainDisplay.Text));
         }
 
         private void DeleteWord(object sender, RoutedEventArgs e)
         {
             if(UserWordBox.SelectedItems.Count<1)return ;
-            wordlist.RemoveAt(UserWordBox.SelectedIndex);
+            for(int i=UserWordBox.SelectedItems.Count-1;i>=0;i--)
+                wordlist.RemoveAt(UserWordBox.SelectedIndex);
         }
 
         private void selectd(object sender, SelectionChangedEventArgs e)
         {
+            WordDisplay.DataContext = "True";
+            PsDisplay.DataContext = "True";
+            ExplainDisplay.DataContext = "True";
             if(UserWordBox.SelectedItems.Count<1)return ;
                 var sel=wordlist.ElementAt(UserWordBox.SelectedIndex);
                 WordDisplay.Text=sel.word;
+                PsDisplay.Text=sel.ps;
+                ExplainDisplay.Text=sel.explain;
         }
 
+        
 
+        private void EditClick(object sender, RoutedEventArgs e)
+        {
+            WordDisplay.DataContext = "False";
+            PsDisplay.DataContext = "False";
+            ExplainDisplay.DataContext = "False";
+        }
 
-       //private void selectd(object sender, SelectionChangedEventArgs e)
-       // {
-       //     //var selectword=UserWordBox.SelectedItems;
-       //     //selectword.Add(new userwords(WordDisplay.Text,"sadsad","sadasd")).;
-       // }
+        public ListViewSelectionMode SelectionMode { get; set; }
+        private void LotsChecked(object sender, RoutedEventArgs e)
+        {
+            
+            UserWordBox.SelectionMode = SelectionMode + 2;
+            
+        }
 
+        private void LotsUnChecked(object sender, RoutedEventArgs e)
+        {
+            UserWordBox.SelectionMode = SelectionMode+1;
+        }
 
-        //public class userwords : INotifyPropertyChanged
-        //{
-        //    public event PropertyChangedEventHandler PropertyChanged;
-        //    private string Word;
-        //    private string Ps;
-        //    private string Explain;
-        //    public userwords(string word, string ps, string explain)
-        //    {
-        //        Word = word;
-        //        Ps = ps;
-        //        Explain = explain;
-        //    }
-        //    public string word
-        //    {
-        //        get
-        //        {
-        //            return Word;
-        //        }
-        //        set
-        //        {
-        //            Word = value;
-        //            if (PropertyChanged != null)
-        //            {
-        //                PropertyChanged(this, new PropertyChangedEventArgs(word));
-        //            }
-        //        }
-        //    }
-        //}
+        private void savechange(object sender, RoutedEventArgs e)
+        {
+            if (UserWordBox.SelectedItems.Count < 1) return;
+            wordlist[UserWordBox.SelectedIndex].word=WordDisplay.Text;
+            wordlist[UserWordBox.SelectedIndex].ps=PsDisplay.Text;
+            wordlist[UserWordBox.SelectedIndex].explain=ExplainDisplay.Text;
+        }
 
-
+        //public RelativeSource
 
     }
 }

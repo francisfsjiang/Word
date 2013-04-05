@@ -34,5 +34,35 @@ namespace Word
                 }
             }
         }
+        public string ps
+        {
+            get
+            {
+                return Ps;
+            }
+            set
+            {
+                Ps = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(ps));
+                }
+            }
+        }
+        public string explain
+        {
+            get
+            {
+                return Explain;
+            }
+            set
+            {
+                Explain = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(explain));
+                }
+            }
+        }
     }
 }
