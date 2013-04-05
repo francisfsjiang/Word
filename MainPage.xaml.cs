@@ -21,15 +21,16 @@ namespace Word
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
+    
     public sealed partial class MainPage : Page
     {
-        public ObservableCollection<userwords> wordlist=new ObservableCollection<userwords>();
+        addwordclass wordlist=new addwordclass();
         public MainPage()
         {
             this.InitializeComponent();
-            wordlist.Add(new userwords("explain", "ɪkˈsplen","vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
-            wordlist.Add(new userwords("explain", "ɪkˈsplen", "vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
-            UserWordBox.DataContext=wordlist;
+            wordlist.add(new userwords("explain", "ɪkˈsplen","vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
+            wordlist.add(new userwords("explain", "ɪkˈsplen", "vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
+            UserWordBox.DataContext=wordlist.relist();
         }
 
         /// <summary>
@@ -44,15 +45,15 @@ namespace Word
 
         private void AddWord(object sender, RoutedEventArgs e)
         {
-            this.NavigationCacheMode(AddPage);
-            //wordlist.Add(new userwords(WordDisplay.Text,PsDisplay.Text,ExplainDisplay.Text));
+            this.Frame.Navigate(typeof(AddPage));
+            //
         }
 
         private void DeleteWord(object sender, RoutedEventArgs e)
         {
             if(UserWordBox.SelectedItems.Count<1)return ;
             for(int i=UserWordBox.SelectedItems.Count-1;i>=0;i--)
-                wordlist.RemoveAt(UserWordBox.SelectedIndex);
+                wordlist.removeat(UserWordBox.SelectedIndex);
         }
 
         private void selectd(object sender, SelectionChangedEventArgs e)
@@ -61,7 +62,7 @@ namespace Word
             PsDisplay.DataContext = "True";
             ExplainDisplay.DataContext = "True";
             if(UserWordBox.SelectedItems.Count<1)return ;
-                var sel=wordlist.ElementAt(UserWordBox.SelectedIndex);
+                var sel=wordlist.elementat(UserWordBox.SelectedIndex);
                 WordDisplay.Text=sel.word;
                 PsDisplay.Text=sel.ps;
                 ExplainDisplay.Text=sel.explain;
@@ -92,9 +93,8 @@ namespace Word
         private void savechange(object sender, RoutedEventArgs e)
         {
             if (UserWordBox.SelectedItems.Count < 1) return;
-            wordlist[UserWordBox.SelectedIndex].word=WordDisplay.Text;
-            wordlist[UserWordBox.SelectedIndex].ps=PsDisplay.Text;
-            wordlist[UserWordBox.SelectedIndex].explain=ExplainDisplay.Text;
+            userwords edit=new userwords(WordDisplay.Text,PsDisplay.Text,ExplainDisplay.Text);
+            wordlist.edit(UserWordBox.SelectedIndex,edit);
         }
 
         //public RelativeSource

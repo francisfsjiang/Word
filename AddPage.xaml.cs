@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -21,6 +22,7 @@ namespace Word
     /// </summary>
     public sealed partial class AddPage : Word.Common.LayoutAwarePage
     {
+        //public ObservableCollection<userwords> wordlist = new ObservableCollection<userwords>();
         public AddPage()
         {
             this.InitializeComponent();
@@ -47,6 +49,13 @@ namespace Word
         /// <param name="pageState">要使用可序列化状态填充的空字典。</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
+        }
+        
+        addwordclass words=new addwordclass();
+        private void addword(object sender, RoutedEventArgs e)
+        {
+            userwords newone=new userwords(WordDisplay.Text, PsDisplay.Text, ExplainDisplay.Text);
+            //words.add(newone);
         }
     }
 }

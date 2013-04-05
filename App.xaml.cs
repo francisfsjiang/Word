@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.ApplicationModel;
@@ -31,8 +32,8 @@ namespace Word
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            
         }
-
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 当启动应用程序以执行打开特定的文件或显示搜索结果等操作时
