@@ -23,10 +23,16 @@ namespace Word
     public sealed partial class AddPage : Word.Common.LayoutAwarePage
     {
         //public ObservableCollection<userwords> wordlist = new ObservableCollection<userwords>();
+        AutoCompleteList lister = new AutoCompleteList();
+        AutoComplete completer = new AutoComplete();
         public AddPage()
         {
+            
             this.InitializeComponent();
+            CompleteBox.DataContext=lister.relist();
+            
         }
+        
 
         /// <summary>
         /// 使用在导航过程中传递的内容填充页。在从以前的会话
@@ -56,6 +62,23 @@ namespace Word
         {
             userwords newone = new userwords(AddWordDisplay.Text, AddPsDisplay.Text, AddSpeechDisplay.Text, AddExplainDisplay.Text);
             words.add(newone);
+        }
+
+        
+        private void Keyup(object sender, KeyRoutedEventArgs e)
+        {
+            lister.clear();
+            completer.complete(SearchBar.Text);
+        }
+
+        private void choseone(object sender, SelectionChangedEventArgs e)
+        {
+            if(CompleteBox.SelectedItems.Count<1)return ;
+                var sel = lister.elementat  (CompleteBox.SelectedIndex);
+                AddWordDisplay .Text=sel.word;
+                AddPsDisplay.Text = sel.ps;
+                AddExplainDisplay.Text = sel.explain;
+                AddSpeechDisplay.Text = sel.speech;
         }
     }
 }

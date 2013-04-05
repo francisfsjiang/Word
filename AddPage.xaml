@@ -43,11 +43,30 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>-->
+            <ListView  x:Name="CompleteBox"
+            HorizontalAlignment="Left" 
+                  Height="309" 
+                  Margin="124,204,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="454" 
+                  Background="White"
+                   ItemsSource="{Binding Mode=TwoWay}" 
+                  SelectionMode="Single" SelectionChanged="choseone">
+                <!--SelectionChanged="selectd"-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Background="AliceBlue">
+                            <TextBlock Text="{Binding word}" Style="{StaticResource ListWordStyle}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <TextBox x:Name="AddWordDisplay"  HorizontalAlignment="Left" Height="65" Margin="729,229,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312" />
-            <TextBox x:Name="AddPsDisplay"    HorizontalAlignment="Left" Height="65" Margin="729,421,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
+            <TextBox x:Name="AddPsDisplay"    HorizontalAlignment="Left" Height="65" Margin="729,333,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
             <TextBox x:Name="AddExplainDisplay"   HorizontalAlignment="Left" Height="65" Margin="729,536,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
-            <Button x:Name="AddWordButton" Content="Button" HorizontalAlignment="Left" Margin="420,536,0,0" VerticalAlignment="Top" Height="58" Width="130" Click="addword"/>
-            <TextBox x:Name="AddSpeechDisplay" HorizontalAlignment="Left" Height="62" Margin="729,324,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="312"/>
+            <TextBox x:Name="AddSpeechDisplay" HorizontalAlignment="Left" Height="62" Margin="729,431,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312"/>
+            <Button x:Name="AddWordButton" Content="Add" HorizontalAlignment="Left" Margin="420,536,0,0" VerticalAlignment="Top" Height="58" Width="130" Click="addword"/>
+            <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="176,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="256" KeyUp="Keyup"/>
         </Grid>
         <VisualStateManager.VisualStateGroups>
 

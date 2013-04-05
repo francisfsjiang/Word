@@ -19,18 +19,12 @@
                   VerticalAlignment="Top" 
                   Width="454" 
                   Background="White"
-                   ItemsSource="{Binding Mode=OneWay}" 
+                   ItemsSource="{Binding Mode=TwoWay}" 
                    SelectionChanged="selectd" >
-            <!--SelectionMode="{RelativeSource selectmode}"-->
-            <!--SelectionChanged="selectd"-->
-            <!--<ListViewItem Content="{Binding word}" Style="{StaticResource WordStyle}"/>
-            <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>
-            <ListViewItem Content="啊啊啊啊啊" Style="{StaticResource WordStyle}"/>-->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Background="AliceBlue">
                         <TextBlock Text="{Binding word}" Style="{StaticResource ListWordStyle}" />
-                        <!--Style="{StaticResource WordStyle}"-->
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
