@@ -54,8 +54,8 @@ namespace Word
         addwordclass words=new addwordclass();
         private void addword(object sender, RoutedEventArgs e)
         {
-            userwords newone=new userwords(WordDisplay.Text, PsDisplay.Text, ExplainDisplay.Text);
-            //words.add(newone);
+            userwords newone = new userwords(AddWordDisplay.Text, AddPsDisplay.Text, AddSpeechDisplay.Text, AddExplainDisplay.Text);
+            words.add(newone);
         }
     }
 }

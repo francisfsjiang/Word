@@ -12,13 +12,23 @@ namespace Word
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private string Word;
+        private string Speech;
         private string Ps;
         private string Explain;
-        public userwords(string word, string ps, string explain)
+
+        public userwords(string word, string ps, string speech, string explain)
         {
             Word = word;
             Ps = ps;
             Explain = explain;
+            Speech=speech;
+        }
+        public userwords(string word, string explain)
+        {
+            Word = word;
+            Ps = " ";
+            Explain = explain;
+            Speech=" ";
         }
         public string word
         {
@@ -62,6 +72,21 @@ namespace Word
                 if (PropertyChanged != null)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs(explain));
+                }
+            }
+        }
+        public string speech
+        {
+            get
+            {
+                return Speech;
+            }
+            set
+            {
+                Speech = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(speech));
                 }
             }
         }

@@ -101,7 +101,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="UserData\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPage.xaml.cs">
@@ -111,6 +110,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddWordClass.cs" />
+    <Compile Include="AutoComplete.cs" />
+    <Compile Include="AutoCompleteList.cs" />
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\BooleanNegationConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
@@ -130,6 +131,8 @@
     <None Include="Word_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UserData\Dictionary.txt" />
+    <Content Include="UserData\UserData.txt" />
     <Page Include="AddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

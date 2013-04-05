@@ -25,14 +25,16 @@ namespace Word
     public sealed partial class MainPage : Page
     {
         addwordclass wordlist=new addwordclass();
+        AutoComplete filereader = new AutoComplete();
         public MainPage()
         {
             this.InitializeComponent();
-            wordlist.add(new userwords("explain", "ɪkˈsplen","vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
-            wordlist.add(new userwords("explain", "ɪkˈsplen", "vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
+            //wordlist.add(new userwords("explain", "ɪkˈsplen","vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
+            //wordlist.add(new userwords("explain", "ɪkˈsplen", "vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
             UserWordBox.DataContext=wordlist.relist();
+            filereader.readfromfile();
         }
-
+        
         /// <summary>
         /// 在此页将要在 Frame 中显示时进行调用。
         /// </summary>
@@ -46,7 +48,6 @@ namespace Word
         private void AddWord(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AddPage));
-            //
         }
 
         private void DeleteWord(object sender, RoutedEventArgs e)
@@ -61,11 +62,13 @@ namespace Word
             WordDisplay.DataContext = "True";
             PsDisplay.DataContext = "True";
             ExplainDisplay.DataContext = "True";
+            SpeechDisplay.DataContext="True";
             if(UserWordBox.SelectedItems.Count<1)return ;
                 var sel=wordlist.elementat(UserWordBox.SelectedIndex);
                 WordDisplay.Text=sel.word;
                 PsDisplay.Text=sel.ps;
                 ExplainDisplay.Text=sel.explain;
+                SpeechDisplay.Text = sel.speech;
         }
 
         
@@ -75,6 +78,7 @@ namespace Word
             WordDisplay.DataContext = "False";
             PsDisplay.DataContext = "False";
             ExplainDisplay.DataContext = "False";
+            SpeechDisplay.DataContext="False";
         }
 
         public ListViewSelectionMode SelectionMode { get; set; }
@@ -93,7 +97,7 @@ namespace Word
         private void savechange(object sender, RoutedEventArgs e)
         {
             if (UserWordBox.SelectedItems.Count < 1) return;
-            userwords edit=new userwords(WordDisplay.Text,PsDisplay.Text,ExplainDisplay.Text);
+            userwords edit = new userwords(WordDisplay.Text, PsDisplay.Text, SpeechDisplay.Text, ExplainDisplay.Text);
             wordlist.edit(UserWordBox.SelectedIndex,edit);
         }
 

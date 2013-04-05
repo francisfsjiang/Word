@@ -43,10 +43,11 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>-->
-            <TextBox x:Name="WordDisplay"  HorizontalAlignment="Left" Height="65" Margin="729,229,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312" />
-            <TextBox x:Name="PsDisplay"    HorizontalAlignment="Left" Height="65" Margin="729,325,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
-            <TextBox x:Name="ExplainDisplay"   HorizontalAlignment="Left" Height="65" Margin="729,413,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
-            <Button x:Name="AddButton" Content="Button" HorizontalAlignment="Left" Margin="602,536,0,0" Grid.Row="1" VerticalAlignment="Top" Height="58" Width="130" Click="addword"/>
+            <TextBox x:Name="AddWordDisplay"  HorizontalAlignment="Left" Height="65" Margin="729,229,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312" />
+            <TextBox x:Name="AddPsDisplay"    HorizontalAlignment="Left" Height="65" Margin="729,421,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
+            <TextBox x:Name="AddExplainDisplay"   HorizontalAlignment="Left" Height="65" Margin="729,536,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="312"/>
+            <Button x:Name="AddWordButton" Content="Button" HorizontalAlignment="Left" Margin="420,536,0,0" VerticalAlignment="Top" Height="58" Width="130" Click="addword"/>
+            <TextBox x:Name="AddSpeechDisplay" HorizontalAlignment="Left" Height="62" Margin="729,324,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="312"/>
         </Grid>
         <VisualStateManager.VisualStateGroups>
 
