@@ -12,6 +12,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Net.Http;
+using Windows.Data.Xml.Dom;
+using Windows.Storage;
+using Windows.Networking.BackgroundTransfer;
 
 // “基本页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234237 上有介绍
 
@@ -25,12 +29,14 @@ namespace Word
         //public ObservableCollection<userwords> wordlist = new ObservableCollection<userwords>();
         AutoCompleteList lister = new AutoCompleteList();
         AutoComplete completer = new AutoComplete();
+        private HttpClient httpclient=new HttpClient();
         public AddPage()
         {
             
             this.InitializeComponent();
             CompleteBox.DataContext=lister.relist();
-            
+            httpclient.MaxResponseContentBufferSize=512*1024;
+            httpclient.DefaultRequestHeaders.Add("user-agent","Mozilla");
         }
         
 
@@ -82,5 +88,62 @@ namespace Word
                 AddExplainDisplay.Text = sel.explain;
                 AddSpeechDisplay.Text = sel.speech;
         }
+
+        List<DownloadOperation>  activeDownloads = new List<DownloadOperation>();
+
+        private async void gethttp(object sender, RoutedEventArgs e)
+        {
+            // XML获取
+            string address = "http://dict-co.iciba.com/api/dictionary.php?w=";
+            address+=AddWordDisplay.Text;
+            string result;
+            if(address.Length==0)return ;
+            else
+            {
+                try
+                {
+                    HttpResponseMessage response=await httpclient.GetAsync(address);
+                    response.EnsureSuccessStatusCode();
+                    AddPsDisplay.Text=response.StatusCode+" "+response.ReasonPhrase;
+                    result= await response.Content.ReadAsStringAsync();
+                    AddExplainDisplay.Text=result;
+                }
+                catch(HttpRequestException hre)
+                {
+                    AddExplainDisplay.Text="Error1"+ hre.ToString();
+                    return;
+                }
+                catch(Exception ex)
+                {
+                    AddExplainDisplay.Text="Error1"+ex.ToString();
+                    return;
+                }
+           }
+           //XML解析
+            XmlDocument xmler = new XmlDocument();
+            xmler.LoadXml(result);
+            XmlNodeList   nodelist;
+            nodelist=xmler.SelectNodes("/dict");
+            string node= nodelist[0].SelectSingleNode("pron").InnerText;
+            AddPsDisplay.Text=node;
+            //Download
+            StorageFile destination = await KnownFolders.DocumentsLibrary.CreateFileAsync("TempVoice.mp3", CreationCollisionOption.ReplaceExisting);
+            if(node.Length!=0)
+            {
+                Uri url=new Uri(node.Trim());
+                //AddSpeechDisplay.Text=url.ToString();
+                BackgroundDownloader downloader=new BackgroundDownloader();
+                DownloadOperation load=downloader.CreateDownload(url,destination);
+                AddSpeechDisplay.Text=load.Guid.ToString();
+                await load.StartAsync();
+            }
+            //play
+            if(destination!=null)
+            {
+                
+            }
+        }
+
+
     }
 }

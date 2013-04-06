@@ -37,8 +37,14 @@
           <FileTypeAssociation Name="userdata">
             <SupportedFileTypes>
               <FileType>.txt</FileType>
+              <FileType>.mp3</FileType>
             </SupportedFileTypes>
           </FileTypeAssociation>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="App.xaml">
+          <BackgroundTasks>
+            <Task Type="audio" />
+          </BackgroundTasks>
         </Extension>
       </Extensions>
     </Application>

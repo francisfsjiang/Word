@@ -67,6 +67,7 @@
             <TextBox x:Name="AddSpeechDisplay" HorizontalAlignment="Left" Height="62" Margin="729,431,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312"/>
             <Button x:Name="AddWordButton" Content="Add" HorizontalAlignment="Left" Margin="420,536,0,0" VerticalAlignment="Top" Height="58" Width="130" Click="addword"/>
             <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="176,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="256" KeyUp="Keyup"/>
+            <Button x:Name="GetHttp" Content="Button" HorizontalAlignment="Left" Height="72" Margin="1112,146,0,0" VerticalAlignment="Top" Width="168" Click="gethttp"/>
         </Grid>
         <VisualStateManager.VisualStateGroups>
 
