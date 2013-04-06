@@ -60,8 +60,10 @@ namespace Word
         addwordclass words=new addwordclass();
         private void addword(object sender, RoutedEventArgs e)
         {
+            if(AddWordDisplay.Text.Length==0)return ;
             userwords newone = new userwords(AddWordDisplay.Text, AddPsDisplay.Text, AddSpeechDisplay.Text, AddExplainDisplay.Text);
             words.add(newone);
+            words.savemyfile();
         }
 
         

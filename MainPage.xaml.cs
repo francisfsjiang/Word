@@ -26,13 +26,15 @@ namespace Word
     {
         addwordclass wordlist=new addwordclass();
         AutoComplete filereader = new AutoComplete();
+        //filereader.readfromfile();
+        //wordlist.readmyfile();
         public MainPage()
         {
             this.InitializeComponent();
             //wordlist.add(new userwords("explain", "ɪkˈsplen","vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
             //wordlist.add(new userwords("explain", "ɪkˈsplen", "vt.& vi. 讲解，解释  vt. 说明…的原因，辩解 vi. 说明，解释，辩解"));
             UserWordBox.DataContext=wordlist.relist();
-            filereader.readfromfile();
+            
         }
         
         /// <summary>
@@ -99,6 +101,7 @@ namespace Word
             if (UserWordBox.SelectedItems.Count < 1) return;
             userwords edit = new userwords(WordDisplay.Text, PsDisplay.Text, SpeechDisplay.Text, ExplainDisplay.Text);
             wordlist.edit(UserWordBox.SelectedIndex,edit);
+            wordlist.savemyfile();
         }
 
         //public RelativeSource

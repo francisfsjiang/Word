@@ -32,6 +32,10 @@ namespace Word
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            addwordclass wordlist = new addwordclass();
+            AutoComplete filereader = new AutoComplete();
+            filereader.readfromfile();
+            wordlist.readmyfile();
             
         }
         /// <summary>

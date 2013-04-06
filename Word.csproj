@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserData\Dictionary.txt" />
-    <Content Include="UserData\UserData.txt" />
+    <Content Include="UserData\UserWords.txt" />
     <Page Include="AddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
