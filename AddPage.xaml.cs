@@ -89,59 +89,90 @@ namespace Word
                 AddSpeechDisplay.Text = sel.speech;
         }
 
+
+
         List<DownloadOperation>  activeDownloads = new List<DownloadOperation>();
 
-        private async void gethttp(object sender, RoutedEventArgs e)
+        
+        private async void playps(object sender, RoutedEventArgs e)
         {
             // XML获取
             string address = "http://dict-co.iciba.com/api/dictionary.php?w=";
-            address+=AddWordDisplay.Text;
+            address += AddWordDisplay.Text;
             string result;
-            if(address.Length==0)return ;
+            if (address.Length == 0) return;
             else
             {
                 try
                 {
-                    HttpResponseMessage response=await httpclient.GetAsync(address);
+                    HttpResponseMessage response = await httpclient.GetAsync(address);
                     response.EnsureSuccessStatusCode();
-                    AddPsDisplay.Text=response.StatusCode+" "+response.ReasonPhrase;
-                    result= await response.Content.ReadAsStringAsync();
-                    AddExplainDisplay.Text=result;
+                    //AddPsDisplay.Text = response.StatusCode + " " + response.ReasonPhrase;
+                    result = await response.Content.ReadAsStringAsync();
+                    //AddExplainDisplay.Text = result;
                 }
-                catch(HttpRequestException hre)
+                catch (HttpRequestException hre)
                 {
-                    AddExplainDisplay.Text="Error1"+ hre.ToString();
+                    AddExplainDisplay.Text = "Error1" + hre.ToString();
                     return;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    AddExplainDisplay.Text="Error1"+ex.ToString();
+                    AddExplainDisplay.Text = "Error1" + ex.ToString();
                     return;
                 }
-           }
-           //XML解析
-            XmlDocument xmler = new XmlDocument();
-            xmler.LoadXml(result);
-            XmlNodeList   nodelist;
-            nodelist=xmler.SelectNodes("/dict");
-            string node= nodelist[0].SelectSingleNode("pron").InnerText;
-            AddPsDisplay.Text=node;
+            }
+            //XML解析
+            string node;
+            if(result.Length!=0)
+            {
+                try
+                {
+                    XmlDocument xmler = new XmlDocument();
+                    xmler.LoadXml(result);
+                    XmlNodeList nodelist;
+                    nodelist = xmler.SelectNodes("/dict");
+                    node= nodelist[0].SelectSingleNode("pron").InnerText;
+                }
+                catch
+                {
+                    return ;
+                }
+            }
+            else return ;
+            //AddPsDisplay.Text = node;
             //Download
             StorageFile destination = await KnownFolders.DocumentsLibrary.CreateFileAsync("TempVoice.mp3", CreationCollisionOption.ReplaceExisting);
-            if(node.Length!=0)
+            if (node.Length != 0)
             {
-                Uri url=new Uri(node.Trim());
-                //AddSpeechDisplay.Text=url.ToString();
-                BackgroundDownloader downloader=new BackgroundDownloader();
-                DownloadOperation load=downloader.CreateDownload(url,destination);
-                AddSpeechDisplay.Text=load.Guid.ToString();
-                await load.StartAsync();
+                try
+                {
+                    Uri url = new Uri(node.Trim());
+                    BackgroundDownloader downloader = new BackgroundDownloader();
+                    DownloadOperation load = downloader.CreateDownload(url, destination);
+                    await load.StartAsync();
+                }
+                catch
+                {
+                    return ;
+                }
             }
+            else return ;
             //play
-            if(destination!=null)
+            if (destination != null)
             {
-                
+                try
+                {
+                    var stream=await destination.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                    outputmedia.SetSource(stream,destination.ContentType);
+                    outputmedia.AutoPlay=true;
+                }
+                catch
+                {
+                    return ;
+                }
             }
+            else return ;
         }
 
 
